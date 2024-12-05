@@ -26,7 +26,9 @@ class AuthController extends Controller
             ]);
 
             $token = $user->createToken('auth_token')->plainTextToken;
-
+            $user->tokens->last()->update([
+                'plan_text' => $token
+            ]);
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
@@ -43,25 +45,61 @@ class AuthController extends Controller
             ], 500);
         }
     }
+
     public function login(Request $request)
     {
-        $validatedData = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-
-        $user = User::where('email', $validatedData['email'])->first();
-        if (!$user || !Hash::check($validatedData['password'], $user->password)) {
-            return response()->json(['error' => 'Invalid Credentials'], 401);
+        try {
+            $validatedData = $request->validate([
+                'email' => 'required|string|email',
+                'password' => 'required|string|min:8',
+            ]);
+    
+            $user = User::where('email', $validatedData['email'])->first();
+    
+            if (!$user || !Hash::check($validatedData['password'], $user->password)) {
+                throw ValidationException::withMessages([
+                    'email' => ['Invalid email or password.'],
+                ]);
+            }
+    
+            $token = $user->createToken('auth_token')->plainTextToken;
+    
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+            ], 200);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation Error',
+                'errors' => $e->errors(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred during login.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json(['access_token' => $token, 'token_type' => 'Bearer']);
     }
+    
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
-        return response()->json(['message' => 'Logged out successfully']);
+        try {
+
+            if (!$request->user()) {
+                return response()->json(['message' => 'Unauthorized'], 401);
+            }
+    
+            $request->user()->tokens()->delete();
+    
+            return response()->json(['message' => 'Logged out successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred during logout.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
+    
+
 }
