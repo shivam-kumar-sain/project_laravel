@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Console\View\Components\Component;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 /*
@@ -17,7 +18,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum')->name('logout');
+Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+// Protected route
+// Route::get('dashboard', function () {
+//     return 'Welcome to your dashboard!';
+// })->middleware('auth')->name('dashboard');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
+    Route::get('/leads', function () {return view('components.leadlist');})->name('leads');
+    Route::get('/settings', function () {return 'This is the settings page. Content will be added later.';})->name('settings');
+});
 
