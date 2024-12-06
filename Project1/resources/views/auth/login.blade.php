@@ -1,30 +1,3 @@
-<!-- @extends('layouts.app')
-
-@section('title', 'Login Page')
-
-@section('content')
-<h1>Login</h1>
-<form action="{{ route('login') }}" method="POST">
-    @csrf
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="{{ old('email') }}" required>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-
-    <button type="submit">Login</button>
-</form>
-@if ($errors->any())
-    <div>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-@endsection -->
-
 <!doctype html>
 <html lang="en" class="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr"
     dir="ltr" data-pc-theme_contrast="" data-pc-theme="light"><!-- [Head] start -->

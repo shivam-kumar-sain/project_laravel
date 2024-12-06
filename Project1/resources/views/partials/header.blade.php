@@ -1,16 +1,7 @@
-<!-- <header> -->
-<!-- <nav>
-        <a href="{{ route('dashboard') }}">Dashboard</a>
-        <a href="{{ route('login') }}">Login</a>
-        <a href="{{ route('register') }}">Register</a>
-    </nav> -->
-
-<!-- [ Header Topbar ] start -->
 <header class="pc-header">
-    <div class="header-wrapper flex max-sm:px-[15px] px-[25px] grow"><!-- [Mobile Media Block] start -->
+    <div class="header-wrapper flex max-sm:px-[15px] px-[25px] grow">
         <div class="me-auto pc-mob-drp">
             <ul class="inline-flex *:min-h-header-height *:inline-flex *:items-center">
-                <!-- ======= Menu collapse Icon ===== -->
                 <li class="pc-h-item pc-sidebar-collapse max-lg:hidden lg:inline-flex"><a href="#"
                         class="pc-head-link ltr:!ml-0 rtl:!mr-0" id="sidebar-hide"><i class="ti ti-menu-2"></i></a>
                 </li>
@@ -25,7 +16,7 @@
                     </form>
                 </li>
             </ul>
-        </div><!-- [Mobile Media Block end] -->
+        </div>
         <div class="ms-auto">
             <ul class="inline-flex *:min-h-header-height *:inline-flex *:items-center">
                 <li class="dropdown pc-h-item"><a class="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown"
@@ -175,7 +166,7 @@
                                     <div class="shrink-0"><img src="{{ asset('assets/images/user/avatar-2.jpg') }}"
                                             alt="user-image" class="w-10 rounded-full"></div>
                                     <div class="grow ms-3">
-                                        <h6 class="mb-1">Carson Darrin 🖖</h6><span><a
+                                        <h6 class="mb-1">{{ Auth::user()->name }} 🖖</h6><span><a
                                                 href="https://ableproadmin.com/cdn-cgi/l/email-protection"
                                                 class="__cf_email__"
                                                 data-cfemail="f2919380819d9cdc969380809b9cb2919d9f82939c8bdc9b9d">[email&#160;protected]</a></span>

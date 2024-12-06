@@ -3,6 +3,7 @@
 use Illuminate\Console\View\Components\Component;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LeadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +33,7 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
-    Route::get('/leads', function () {return view('components.leadlist');})->name('leads');
+    Route::get('/leads', [LeadController::class, 'showLeadList'])->name('leads');
     Route::get('/settings', function () {return 'This is the settings page. Content will be added later.';})->name('settings');
 });
 

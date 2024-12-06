@@ -13,14 +13,16 @@
         content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard">
     <meta name="author" content="Phoenixcoded"><!-- [Favicon] icon -->
     <link rel="icon" href="https://ableproadmin.com/tailwind/assets/images/favicon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-style-link">
-    <link rel="stylesheet" href="{% static 'fonts/inter/inter.css' %}" id="main-font-link">
-    <link rel="stylesheet" href="{% static 'fonts/phosphor/duotone/style.css' %}">
-    <link rel="stylesheet" href="{% static 'fonts/tabler-icons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fonts/feather.css' %}">
-    <link rel="stylesheet" href="{% static 'fonts/fontawesome.css' %}">
-    <link rel="stylesheet" href="{% static 'fonts/material.css' %}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/inter/inter.css') }}" id="main-font-link">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/phosphor/duotone/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/tabler-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/feather.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/material.css') }}">
+    <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/fixedColumns.bootstrap5.min.css') }}">    
     <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/fixedColumns.bootstrap5.min.css') }}">
@@ -73,7 +75,6 @@
     <script src="{{ asset('assets/js/component.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
-    <script src="{{ asset('assets/ajax/libs/jquery/3.6.0/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/dataTables.fixedColumns.min.js') }}"></script>
@@ -85,7 +86,6 @@
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
-
     <script>layout_change('false');</script>
     <script>layout_theme_contrast_change('false');</script>
     <script>change_box_container('false');</script>
@@ -93,6 +93,33 @@
     <script>layout_rtl_change('false');</script>
     <script>preset_change('preset-1');</script>
     <script>main_layout_change('vertical');</script>
+    <script src="{{ asset('assets/ajax/libs/jquery/3.6.0/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/dataTables.fixedColumns.min.js') }}"></script>
+    <script>// [ left-right-fix
+        var table = $('#left-right-fix').DataTable({
+          scrollY: '300px',
+          scrollX: true,
+          scrollCollapse: true,
+          paging: false,
+          fixedColumns: {
+            leftColumns: 1,
+            rightColumns: 1
+          }
+        });
+        var table = $('#right-fix').DataTable({
+          scrollY: '300px',
+          scrollX: true,
+          scrollCollapse: true,
+          paging: false,
+          fixedColumns: {
+            leftColumns: 0,
+            rightColumns: 1
+          }
+        });</script>
+
+
 </body>
 
 </html>
